@@ -1,23 +1,54 @@
 import React from "react";
-
-const caloriesStyle = {
-    color: "red",
-};
+import {
+    MDBCard,
+    MDBCardBody,
+    MDBCardTitle,
+    MDBCardText,
+    MDBCardImage,
+    MDBBadge,
+    MDBListGroup,
+    MDBListGroupItem,
+    MDBCardFooter,
+    MDBCol,
+} from "mdb-react-ui-kit";
 
 const Recipe = (props) => {
     // console.log(props.recipe);
-    const { calories, image, label, ingredients } = props.recipe.recipe;
+    const { url, image, label, ingredients, cuisineType, dishType, source } =
+        props.recipe.recipe;
     return (
-        <div className="recipe">
-            <h1 className="recipe-title">{label}</h1>
-            <p className="caloriesStyle">Calories: {calories}</p>
-            <ol>
-                {ingredients.map((e, index) => (
-                    <li key={index}>{e.text}</li>
-                ))}
-            </ol>
-            <img src={image} alt={label} />
-        </div>
+        <MDBCol>
+            <a href={url} target="_blank">
+                <MDBCard style={{ maxWidth: "22rem" }} className="h-100">
+                    <MDBCardImage position="top" src={image} alt={label} />
+
+                    <MDBCardBody>
+                        <MDBCardTitle className="text-danger fw-bold">
+                            {label}
+                        </MDBCardTitle>
+                        <MDBListGroup flush>
+                            {ingredients.map((e, index) => (
+                                <MDBListGroupItem key={index}>
+                                    {e.text}
+                                </MDBListGroupItem>
+                            ))}
+                        </MDBListGroup>
+                        <MDBCardText>
+                            <MDBBadge color="success">{cuisineType}</MDBBadge>
+                            <MDBBadge color="warning" className="mx-2">
+                                {dishType}
+                            </MDBBadge>
+                        </MDBCardText>
+
+                        <MDBCardFooter>
+                            <small className="text-muted">
+                                Source: {source}
+                            </small>
+                        </MDBCardFooter>
+                    </MDBCardBody>
+                </MDBCard>
+            </a>
+        </MDBCol>
     );
 };
 

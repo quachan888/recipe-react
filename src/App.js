@@ -1,7 +1,15 @@
 import "./App.css";
 import Recipe from "./Recipe";
 import React, { useEffect, useState } from "react";
-import { chickenRecipes } from "./data";
+import "mdb-react-ui-kit/dist/css/mdb.min.css";
+import {
+    MDBRow,
+    MDBContainer,
+    MDBNavbar,
+    MDBBtn,
+    MDBIcon,
+} from "mdb-react-ui-kit";
+import Footer from "./Footer";
 
 function App() {
     const APP_ID = "9ff9907e";
@@ -27,7 +35,7 @@ function App() {
 
     const getRecipes = async () => {
         const response = await fetch(
-            `https://api.edamam.com/search?q=${query}&app_id=${APP_ID}&app_key=${APP_KEY}`,
+            `https://api.edamam.com/search?q=${query}&app_id=${APP_ID}&app_key=${APP_KEY}&from=0&to=20`,
         );
         const data = await response.json();
         setRecipes(data.hits);
@@ -35,22 +43,35 @@ function App() {
 
     return (
         <div className="App">
-            <form className="search-form" onSubmit={getSearch}>
-                <input
-                    type="text"
-                    className="search-bar"
-                    value={search}
-                    onChange={updateSearch}
-                />
-                <button type="submit" className="search-button">
-                    Search
-                </button>
-            </form>
-            <div className="recipes">
-                {recipes.map((recipe, i) => (
-                    <Recipe recipe={recipe} key={i} />
-                ))}
+            <MDBNavbar light bgColor="light" className="py-4 text-white">
+                <MDBContainer className="container">
+                    <a className="navbar-brand text-danger fw-bold fs-3">
+                        <MDBIcon fas icon="utensils" size="lg" /> &nbsp; Recipes
+                        Quick Book
+                    </a>
+                    <form
+                        className="d-flex input-group w-auto"
+                        onSubmit={getSearch}
+                    >
+                        <input
+                            type="search"
+                            className="form-control"
+                            placeholder="Search recipes"
+                            aria-label="Search"
+                            onChange={updateSearch}
+                        />
+                        <MDBBtn color="primary ">Search</MDBBtn>
+                    </form>
+                </MDBContainer>
+            </MDBNavbar>
+            <div className="container">
+                <MDBRow className="row-cols-1 row-cols-lg-4 row-cols-md-2 g-4 my-3">
+                    {recipes.map((recipe, i) => (
+                        <Recipe recipe={recipe} key={i} />
+                    ))}
+                </MDBRow>
             </div>
+            <Footer />
         </div>
     );
 }
