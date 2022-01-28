@@ -17,7 +17,7 @@ function App() {
 
     const [recipes, setRecipes] = useState([]);
     const [search, setSearch] = useState("");
-    const [query, setQuery] = useState("chicken");
+    const [query, setQuery] = useState("breakfast");
 
     useEffect(() => {
         getRecipes();
@@ -43,7 +43,11 @@ function App() {
 
     return (
         <div className="App">
-            <MDBNavbar light bgColor="light" className="py-4 text-white">
+            <MDBNavbar
+                light
+                bgColor="light"
+                className="py-4 text-white shadow-5"
+            >
                 <MDBContainer className="container">
                     <a className="navbar-brand text-danger fw-bold fs-3">
                         <MDBIcon fas icon="utensils" size="lg" /> &nbsp; Recipes
@@ -65,7 +69,7 @@ function App() {
                 </MDBContainer>
             </MDBNavbar>
             <div className="container">
-                <MDBRow className="row-cols-1 row-cols-lg-4 row-cols-md-2 g-4 my-3">
+                <MDBRow className="row-cols-1 row-cols-sm-2  row-cols-md-3 g-3 m-2">
                     {recipes.map((recipe, i) => (
                         <Recipe recipe={recipe} key={i} />
                     ))}

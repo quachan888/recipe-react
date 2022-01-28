@@ -10,6 +10,7 @@ import {
     MDBListGroupItem,
     MDBCardFooter,
     MDBCol,
+    MDBBtn,
 } from "mdb-react-ui-kit";
 
 const Recipe = (props) => {
@@ -18,36 +19,41 @@ const Recipe = (props) => {
         props.recipe.recipe;
     return (
         <MDBCol>
-            <a href={url} target="_blank">
-                <MDBCard style={{ maxWidth: "22rem" }} className="h-100">
-                    <MDBCardImage position="top" src={image} alt={label} />
+            <MDBCard className="hover-shadow">
+                <MDBCardImage position="top" src={image} alt={label} />
 
-                    <MDBCardBody>
-                        <MDBCardTitle className="text-danger fw-bold">
-                            {label}
-                        </MDBCardTitle>
-                        <MDBListGroup flush>
-                            {ingredients.map((e, index) => (
-                                <MDBListGroupItem key={index}>
-                                    {e.text}
-                                </MDBListGroupItem>
-                            ))}
-                        </MDBListGroup>
-                        <MDBCardText>
-                            <MDBBadge color="success">{cuisineType}</MDBBadge>
-                            <MDBBadge color="warning" className="mx-2">
-                                {dishType}
-                            </MDBBadge>
-                        </MDBCardText>
+                <MDBCardBody>
+                    <MDBCardTitle className="text-dark fw-bold fs-4">
+                        {label}
+                    </MDBCardTitle>
+                    <MDBCardText className="text-center">
+                        <MDBBadge pill color="success">
+                            Cuisine: {cuisineType}
+                        </MDBBadge>
 
-                        <MDBCardFooter>
-                            <small className="text-muted">
-                                Source: {source}
-                            </small>
-                        </MDBCardFooter>
-                    </MDBCardBody>
-                </MDBCard>
-            </a>
+                        <MDBBadge color="secondary" className="mx-2">
+                            Dish: {dishType}
+                        </MDBBadge>
+                    </MDBCardText>
+                    <MDBListGroup flush>
+                        {ingredients.map((e, index) => (
+                            <MDBListGroupItem key={index} className="fs-6">
+                                {e.text}
+                            </MDBListGroupItem>
+                        ))}
+                    </MDBListGroup>
+
+                    <a href={url} target="_blank">
+                        <div class="d-grid gap-2">
+                            <MDBBtn color="dark">Get the Recipe</MDBBtn>
+                        </div>
+                    </a>
+
+                    <MDBCardFooter className="text-end fs-6 text-muted">
+                        By {source}
+                    </MDBCardFooter>
+                </MDBCardBody>
+            </MDBCard>
         </MDBCol>
     );
 };
