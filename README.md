@@ -1,3 +1,11 @@
+# Recipese Quick Book
+
+### React learning project
+
+Live demo: [https://quachan888.github.io/recipe-react/](https://quachan888.github.io/recipe-react/)
+
+---
+
 # Getting Started with Create React App
 
 This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
